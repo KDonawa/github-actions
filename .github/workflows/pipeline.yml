@@ -6,11 +6,15 @@ on:
       - main
 
 jobs:
-  a_test_job:
+  deploy:
     runs-on: ubuntu-latest
+    if: ${{ !contains(github.event.head_commit.message), "#skip" }}
     steps:
       - uses: actions/checkout@v3
       - name: commit message
-        env:
-          COMMIT_MESSAGE: ${{ toJson(github.event.head_commit.message) }}
-        run: echo "$COMMIT_MESSAGE"
+        run: echo "deploying"
+  test:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Test"
