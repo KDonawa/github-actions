@@ -5,7 +5,7 @@ on:
     branches:
       - main
 env:
-  COMMIT_MESSAGE: github.event.head_commit.message
+  COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
 
 jobs:
   a_test_job:
